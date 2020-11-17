@@ -1,0 +1,152 @@
+// 填加单位后缀
+u(n)
+  n == 0 ? n : unit(n, px);
+
+// font color
+$font-colors = {
+   '0': #000,
+    '3': #333,
+    '4': #444,
+    '45': rgba(0, 0, 0, 0.45),
+    '5': rgba(0, 0, 0, 0.5),
+    '6': #666,
+    '65': rgba(0, 0, 0, 0.65),
+    '7': rgba(0, 0, 0, 0.7),
+    '8': rgba(0, 0, 0, 0.85),
+    '85': rgba(0, 0, 0, 0.85),
+    '9': #999,
+    'a': #aaa,
+    'b': #bbb,
+    'c': #ccc,
+    'd': #ddd,
+    'e': #eee,
+    'f': #fff,
+}
+
+for $key, $value in $font-colors
+  .fc{$key}
+    color $value
+
+// font size
+for $n in 0 12 14 16 18 20 22 24 26 28 30
+  .fs{$n}
+    font-size u($n)
+
+// all padding
+for $n in 0 2 4 6 8 10 12 14 16 18 20 22 24 26 28 30
+  .p{$n}
+    padding u($n)
+
+// special padding
+for $n in 0 2 4 6 8 10 12 14 16 18 20 22 24 26 28 30
+  .pt{$n}
+    padding-top u($n)
+  .pr{$n}
+    padding-right u($n)
+  .pb{$n}
+    padding-bottom u($n)
+  .pl{$n}
+    padding-left u($n)
+
+// all margin
+for $n in 0 2 4 6 8 10 12 14 16 18 20 22 24 26 28 30
+  .m{$n}
+    margin u($n)
+
+// special margin
+for $n in 0 2 4 6 8 10 12 14 16 18 20 22 24 26 28 30 32 34 36 40
+  .mt{$n}
+    margin-top u($n)
+  .mr{$n}
+    margin-right u($n)
+  .mb{$n}
+    margin-bottom u($n)
+  .ml{$n}
+    margin-left u($n)
+
+.mla
+  margin-left auto
+
+.mra
+  margin-right auto
+
+.bold
+  font-weight bold
+// 定位
+.pr
+  position relative
+.pa
+  position absolute
+
+.fac
+  text-align center
+.fal
+  text-align left
+.far
+  text-align right
+
+.hide
+  display none
+
+.r4
+  border-radius 4px
+
+.fl
+  float left
+.fr
+  float right
+
+.omit
+  overflow hidden
+  text-overflow ellipsis
+  word-break keep-all
+  white-space nowrap
+.omit2
+  overflow hidden
+  text-overflow ellipsis
+  display -webkit-box
+  -webkit-line-clamp 2
+  -webkit-box-orient vertical
+.omit3
+  overflow hidden
+  text-overflow ellipsis
+  display -webkit-box
+  -webkit-line-clamp 3
+  -webkit-box-orient vertical
+
+.hand
+  cursor pointer
+
+.fn-clear:after
+  visibility hidden
+  display block
+  font-size 0
+  height 0
+
+.gray-box
+  background-color #fafafa
+  border 1px solid #d9d9d9
+
+.gray-box-deep
+  background-color #f5f5f5
+  border 1px solid #d9d9d9
+
+.gray-bd
+  border 1px solid #e8e8e8
+
+.gray-bd-deep
+  border 1px solid #d9d9d9
+
+.height100
+  height 100%
+
+.w100
+  width 100%
+
+.h100
+  height 100%
+
+.fw300
+  font-weight 300
+.fw500
+  font-weight 500

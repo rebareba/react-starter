@@ -1,0 +1,38 @@
+{
+	"login": {
+		"failed": {
+			"success": false,
+			"code": "ERROR_PASS_ERROR",
+			"content": null,
+			"message": "账号或密码错误!"
+		},
+		"success": {
+			"success": true,
+			"code": 0,
+			"content": {
+				"name": "admin",
+				"nickname": "超级管理员",
+				"permission": 15
+			},
+			"message": ""
+		},
+		"false": {
+			"success": false,
+			"code": "ERROR_PASS_ERROR",
+			"content": null,
+			"message": "账号或密码错误!"
+		}
+	},
+	"loginInfo": {
+		"success": {
+			"success": true,
+			"code": 0,
+			"content": {
+				"name": "admin",
+				"nickname": "超级管理员",
+				"permission": 15
+			},
+			"message": ""
+		}
+	}
+}
