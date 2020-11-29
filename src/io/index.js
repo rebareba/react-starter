@@ -83,7 +83,7 @@ export const createIo = (ioContent, name = '') => {
         ioContent[key].mock = JSON.parse(JSON.stringify(mockData[name][key][config.mock[`${name}.${key}`]]))
       } else if (name && config.debug === true) {
         if (options.headers) {
-          options.headers[''] = name
+          options.headers['mock-key'] = name
           options.headers['mock-method'] = key
         } else {
           options.headers = {'mock-key': name, 'mock-method': key}
