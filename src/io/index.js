@@ -66,18 +66,18 @@ export const createIo = (ioContent, name = '') => {
 
       // 这里判断简单请求封装 rejectToData=true 表示复杂封装
       if (!options[rejectToData]) {
-        delete options[rejectToData]
         options = {
           data: options,
         }
       }
+      delete options[rejectToData]
       if (
+        config.debug === false &&
         name &&
         config.mock &&
         config.mock[`${name}.${key}`] &&
         mockData[name] &&
-        mockData[name][key] &&
-        config.debug === false
+        mockData[name][key]
       ) {
         // 这个mock数据要深拷贝下 _.cloneDeep(value)
         ioContent[key].mock = JSON.parse(JSON.stringify(mockData[name][key][config.mock[`${name}.${key}`]]))
