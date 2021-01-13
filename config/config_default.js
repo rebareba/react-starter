@@ -10,16 +10,16 @@ module.exports = {
   // npm run build 打包的 publicPath 路径
   versionPrefix: `/${pkg.name}/${pkg.version}/`,
   // devServer.port
-  port: 8888,
+  port: 9999,
   // 接口匹配转发 devServer.proxy
   proxy: {
     "/api/react-starter/*": {
-      target: `http://192.168.90.68:8888`,
+      target: `http://127.0.0.1:8888`,
       changeOrigin: true, // 支持跨域请求
       secure: true, // 支持 https
     },
     "/render-server/api/*": {
-      target: `http://192.168.90.68:8888`,
+      target: `http://127.0.0.1:8888`,
       changeOrigin: true, // 支持跨域请求
       secure: true, // 支持 https
     },

@@ -1,18 +1,22 @@
 /*
  * @Author: changfeng
  * @LastEditors: changfeng
- * @LastEditTime: 2020-11-29 17:45:52
+ * @LastEditTime: 2021-01-13 15:47:25
  * @Description: webpack proxy 模块的接口代理的 前处理 onProxyReq 后处理 onProxyRes 来处理接口缓存操作
  */
 
 const fs = require('fs')
 const path = require('path')
+const prettier = require('prettier')
 const moment = require('moment')
 const {getConf, getMockJson} = require('./webpack-init')
 const API_CACHE_DIR = path.join(__dirname, '../api-cache')
 const {jsonParse, getBody} = require('./util')
 
-fs.mkdirSync(API_CACHE_DIR,{recursive: true})
+try {
+  fs.mkdirSync(API_CACHE_DIR,{recursive: true})
+} catch(e){}
+
 
 
 module.exports = {

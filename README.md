@@ -1,6 +1,7 @@
 ## 介绍
 
 react + antd + mobx + js (typescript) 的参考开发模板
+[前端mock完美解决方案实战](https://segmentfault.com/a/1190000038320901?_ea=91644518)
 
 
 ### 分支介绍

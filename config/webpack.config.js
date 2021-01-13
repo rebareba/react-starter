@@ -149,9 +149,8 @@ const webpackConf = {
               // ["import", { "libraryName": "antd-mobile", "style": 'css'}, "antd-mobile"],
               '@babel/plugin-syntax-dynamic-import',
               ['@babel/plugin-proposal-decorators', {legacy: true}],
-              ['@babel/plugin-proposal-class-properties', {loose: true}],
-              isDev && require.resolve('react-refresh/babel')
-            ],
+              ['@babel/plugin-proposal-class-properties', {loose: true}]
+            ].concat(isDev? [require.resolve('react-refresh/babel')]: []),
             cacheDirectory: true,
           },
         },
