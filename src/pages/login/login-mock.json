@@ -1,5 +1,5 @@
 {
-	"login": {
+  "login": {
 		"failed": {
 			"success": false,
 			"code": "ERROR_PASS_ERROR",
@@ -21,18 +21,6 @@
 			"code": "ERROR_PASS_ERROR",
 			"content": null,
 			"message": "账号或密码错误!"
-		}
-	},
-	"loginInfo": {
-		"success": {
-			"success": true,
-			"code": 0,
-			"content": {
-				"name": "admin",
-				"nickname": "超级管理员",
-				"permission": 15
-			},
-			"message": ""
 		}
 	}
 }

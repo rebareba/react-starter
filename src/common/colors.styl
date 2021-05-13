@@ -1,0 +1,104 @@
+$color-else-range = {
+  '7': #777777,
+  '6a': #6a6a6a,
+  '6': #666666,
+  '5a': #5a5a5a,
+  '5': #555555,
+  '4a': #4a4a4a,
+  '4': #444444,
+  '3a': #3a3a3a,
+  '3': #333333,
+  '2a': #2a2a2a,
+  '2': #222222,
+  '1a': #1a1a1a,
+  '1': #111111,
+  '0': #000000,
+}
+
+$color-white-range = {
+    '84':0.84,
+    '64':0.64,
+    '60':0.6,
+    '56':0.56,
+    '52':0.52,
+    '48':0.48,
+    '44':0.44,
+    '40':0.4,
+    '36':0.36,
+    '32':0.32,
+    '28':0.28,
+    '24':0.24,
+    '20':0.2,
+    '16':0.16,
+    '12':0.12,
+    '10':0.1,
+    '8':0.08,
+    '6':0.06,
+    '4':0.04,
+    '2':0.02,
+}
+
+$color-black-range = {
+    '10':0.1,
+    '20':0.2,
+    '30':0.3,
+    '40':0.4,
+    '50':0.5,
+    '60':0.6,
+    '70':0.7,
+}
+
+.ctw
+  color:rgba(255,255,255,1)
+
+.ctb
+  color:rgba(0,0,0,1)
+
+.cfw
+  background-color:rgba(255,255,255,1)
+
+.cfb
+  background-color:rgba(0,0,0,1)
+
+// 任意色文字
+for $key, $value in $color-else-range
+  .ct{$key}
+    color: $value
+
+// 任意色填充
+for $key, $value in $color-else-range
+  .cf{$key}
+    background-color: $value
+
+// 白色填充色
+for $key, $value in $color-white-range
+  .cfw{$key}
+    background-color: rgba(255,255,255,$value)
+
+// 白色文字
+for $key, $value in $color-white-range
+  .ctw{$key}
+    color: rgba(255,255,255,$value)
+
+// 黑色填充色
+for $key, $value in $color-black-range
+  .cfb{$key}
+    background-color: rgba(0,0,0,$value)
+
+// 黑色文字
+for $key, $value in $color-black-range
+  .ctb{$key}
+    color: rgba(0,0,0,$value)
+
+.ciw
+  fill #fff
+.ciGray
+  fill #999
+
+.ctMain
+  color #00b7ff
+  font-weight: bold
+.ctNote
+  color #f70
+  font-weight: bold
+

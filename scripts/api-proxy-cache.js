@@ -1,10 +1,9 @@
 /*
  * @Author: changfeng
  * @LastEditors: changfeng
- * @LastEditTime: 2021-01-13 15:47:25
+ * @LastEditTime: 2021-05-12 14:26:14
  * @Description: webpack proxy 模块的接口代理的 前处理 onProxyReq 后处理 onProxyRes 来处理接口缓存操作
  */
-
 const fs = require('fs')
 const path = require('path')
 const prettier = require('prettier')
@@ -17,8 +16,7 @@ try {
   fs.mkdirSync(API_CACHE_DIR,{recursive: true})
 } catch(e){}
 
-
-
+// https://github.com/chimurai/http-proxy-middleware
 module.exports = {
   onProxyReq: async (_, req, res) => {
     req.reqBody = await getBody(req)
@@ -34,10 +32,11 @@ module.exports = {
       const mockJson = getMockJson()
       if (conf.mock && conf.mock[`${mockKey}.${mockMethod}`] && mockJson[mockKey] && mockJson[mockKey][mockMethod]) {
         // eslint-disable-next-line no-console
-        console.log(`use mock data ${mockKey}.${mockMethod}:`, conf.mock[`${mockKey}.${mockMethod}`], 'color: green')
+        console.log('use mock data'.blue, `${mockKey}.${mockMethod}:`.green, conf.mock[`${mockKey}.${mockMethod}`])
         res.mock = true
         res.append('isMock','yes')
         res.send(mockJson[mockKey][mockMethod][conf.mock[`${mockKey}.${mockMethod}`]])
+        _.destroy()
       }
      
     }

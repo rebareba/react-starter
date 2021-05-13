@@ -1,7 +1,0 @@
-{
-  "skipCI": false,
-  "hooks": {
-    "commit-msg": "commitlint -e $HUSKY_GIT_PARAMS",
-    "pre-commit": "node_modules/.bin/eslint  --ext .js,.ts,.jsx,.tsx ."
-  }
-}

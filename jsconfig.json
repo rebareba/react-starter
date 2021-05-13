@@ -5,6 +5,14 @@
     "paths": {
       "@/*": ["."],
       "@src/*": ["src/*"],
+      "@pages/*": ["src/pages/*"],
+      "@models/*": ["src/models/*"],
+      "@components/*": ["src/components/*"],
+      "@utils/*": ["src/utils/*"],
+      "@i18n/*": ["src/i18n/*"],
+      "@icons/*": ["src/icons/*"],
+      "@assets/*": ["src/assets/*"],
+      "@common/*": ["src/common/*"],
     }
   },
   "exclude": [

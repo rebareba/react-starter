@@ -4,25 +4,23 @@ module.exports = {
   // 名称
   projectName: pkg.name,
   version: pkg.version,
-
   // npm run build-cdn 打包的 publicPath 路径
-  cdnPrefix: `//cdn.xxxx.com/${pkg.name}/${pkg.version}/`,
+  cdnPrefix: `//cdn.xxx.com/${pkg.name}/${pkg.version}/`,
   // npm run build 打包的 publicPath 路径
   versionPrefix: `/${pkg.name}/${pkg.version}/`,
-  // devServer.port
-  port: 9999,
+  port: 8890,
   // 接口匹配转发 devServer.proxy
   proxy: {
-    "/api/react-starter/*": {
-      target: `http://127.0.0.1:8888`,
+    "/api/*": {
+      target: `http://192.168.90.160:8888`,
       changeOrigin: true, // 支持跨域请求
-      secure: true, // 支持 https
+      secure: true,
     },
-    "/render-server/api/*": {
-      target: `http://127.0.0.1:8888`,
-      changeOrigin: true, // 支持跨域请求
-      secure: true, // 支持 https
-    },
+  },
+  // webpack 打包忽略配置 要在index.html引入public资源
+  externals: {
+    react: 'React',
+    'react-dom': 'ReactDOM',
   },
   // 多入口情况的重定向
   rewrites: [
@@ -30,31 +28,32 @@ module.exports = {
     //   from: /^\/admin/, to: '/admin.html'
     // },
   ],
-  // antd 主题配置
-  antdThemeConfig: {
-    '@primary-color': '#1890ff' // 全局主色
-  },
-  // 前端代码配置 动态生成config/conf.json中的数据
+  // 前端代码配置 动态生成config/conf.json中的数据， 也是index.html模板的数据
   conf: {
     dev: {
-      title: "前端后台模板",
-      pathPrefix: "/react-starter",
-      apiPrefix: "/api/react-starter",
+      title: "React Starter",
+      pathPrefix: "",
+      apiPrefix: "/api",
       debug: true,
-      // mock数据模拟延迟
-      delay: 500,
       mock: {
-        // "global.login": "success",
-        // "global.loginInfo": "success",
-        // "global.logout": "success",
-      }
+        "global.login": "success", // failed success
+        "global.loginInfo": "failed", // success failed
+        "global.logout": "success",
+        "login.login": "success",
+      },
+      // 指定public资源的域名 是否是cdn的资源
+      publicHost: ''
     },
     build: {
-      title: "前端后台模板",
-      pathPrefix: "/react-starter",
-      apiPrefix: "/api/react-starter",
+      title: "React Starter",
+      pathPrefix: "",
+      apiPrefix: "/api",
       debug: false,
-      mock: {}
+      // mock数据模拟延迟
+      delay: 100,
+      mock: {},
+      // 指定public资源的域名 是否是cdn的资源
+      publicHost:''
     }
   }
 };

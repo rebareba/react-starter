@@ -1,7 +1,7 @@
 /*
  * @Author: changfeng
  * @LastEditors: changfeng
- * @LastEditTime: 2020-11-09 21:03:21
+ * @LastEditTime: 2021-04-22 22:21:08
  * @Description: webpack的脚本，动态生成mock.json和config/conf.json, 并且监听config目录下的config
  */ 
 const path = require('path')
@@ -49,7 +49,7 @@ exports.getMockJson =() => mockJsonData
   const buildMockJson = {}
   Object.keys(mockMap).forEach((key) => {
     const [name, method] = key.split('.')
-    if (mockJson[name][method] && mockJson[name][method][mockMap[key]]) {
+    if (mockJson[name] && mockJson[name][method] && mockJson[name][method][mockMap[key]]) {
       if (!buildMockJson[name]) buildMockJson[name] = {}
       if (!buildMockJson[name][method]) buildMockJson[name][method] = {}
       buildMockJson[name][method][mockMap[key]] = mockJson[name][method][mockMap[key]]

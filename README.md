@@ -1,85 +1,85 @@
-## 介绍
+### 介绍
 
-react + antd + mobx + js (typescript) 的参考开发模板
-[前端mock完美解决方案实战](https://segmentfault.com/a/1190000038320901?_ea=91644518)
+[react@17 + antd@4 + mobx@6 + webpack@5+ JS 开发脚手架](https://segmentfault.com/a/1190000038320901?_ea=91644518)
 
+Github: https://github.com/rebareba/react-starter
 
-### 分支介绍
+它有这些功能：
 
-- master  -------- 基础的js版本 dev为其开发版本
-- ts      -------- 基础的ts版本
-- admin   -------- 管理后台的基本模板 对接koa-user-center
+- 开发打包有不同配置
+- eslint 验证
+- 代码风格统一
+- 接口mock
+- 热更新
+- 异步组件
 
-## 目录结构
+### 目录结构
 
 ```
-.
 ├── .eslintignore                     --- eslint忽略配置
 ├── .eslintrc.js                      --- eslint相关配置	
 ├── .gitignore                        --- git 忽略配置
-├── .huskyrc                          --- git commit 的husky的配置
 ├── .prettierignore                   --- Prettier 忽略路径文件
 ├── .prettierrc.js                    --- Prettier 的配置
 ├── .vscode                           --- 编辑器配置
-│   └── settings.json
-├── README.md                         --- 使用手册
-├── commitlint.config.js              --- git commit 的要求配置
+├── jsconfig.json                     --- 编辑器js环境配置
+├── mock.json                         --- 动态生成mock文件 gitignore
+├── api-cache                         --- 后端接口请求缓存 gitignore
 ├── config                            --- webpack 和 前端 配置文件目录
 │   ├── conf.json                     --- 前端配置 动态生成  git不跟踪
 │   ├── config.js                     --- 开发自定义配置替换default, git不跟踪
 │   ├── config_default.js             --- 默认的开发配置
 │   └── index.js
+│   └── webpack.config.js             --- webpack配置
 ├── dist                              --- 打包出来的文件夹目录
 │   ├── public
-│   │   ├── antd
-│   │   └── react
 │   ├── react-starter
 │   │   ├── 1.0.0
 │   │   └── index.html
-│   └── react-starter_1.0.0_public.tgz
-├── package-lock.json
-├── package.json                     --- npm包依赖项目配置 及 脚本命令
-├── public                           --- 公共资源目录
+│   ├── react-starter_1.0.0_public.tgz
+├── public                            --- 公共资源目录
 │   ├── antd
-│   │   └── 3.23.6
 │   └── react
-│       └── 16.10.2
-├── scripts                          --- 常用脚本
-│   ├── echo_view.js                 --- 输出ejs模板的json
-│   ├── render-server.ejs            --- ejs模板
-│   └── tar.js                       --- 创建压缩包脚本
-├── src                              --- 项目代码
-│   ├── assets                       --- 静态资源
-│   │   ├── sprite-icon
-│   │   └── svg
-│   ├── common                       --- 通用工具的文件夹
-│   │   ├── common.styl              --- 默认的样式
-│   │   ├── constant.js              --- 常量配置， error_code和菜单页面路由组件配置
-│   │   ├── flexbox.css              --- 默认的flex布局样式
-│   │   ├── history.js               --- 路由
-│   │   ├── request.js               --- ajax请求封装 基于axios
-│   │   └── utils.jsx
-│   ├── components                   --- 通用的组件目录
-│   │   └── .gitkeep
-│   ├── frame                        --- 框架组件页
-│   │   ├── frame.jsx
-│   │   ├── frame.styl
-│   │   └── index.jsx
-│   ├── index.jsx                    --- 前端入口
-│   ├── io
-│   │   ├── auth-apis.js             --- 会话相关接口配置
-│   │   ├── auth-mock.json           --- mock配置 -mock.json结尾的
-│   │   ├── global-store.js          --- 全局store, 会话和面包屑相关
-│   │   ├── index.js                 --- io的封装 createIo方法
-│   │   └── mock.json                --- mock文件 动态生成 git不跟踪
-│   └── pages                        --- 页面集合目录
-│       ├── about                    --- 具体页面
-│       ├── home                     --- 登陆主页
-│       ├── index.html               --- 对应入口文件index.jsx的html模板
-│       └── login                    --- 登陆页
-└── webpack.config.js                --- webpack配置
+├── scripts                           --- 无需关心的一些脚本
+│   ├── api-proxy-cache.js            --- webpackSev的代理Hook
+│   ├── build-mock.js
+│   ├── tar.js
+│   ├── util.js
+│   └── webpack-init.js
+└── src
+    ├── assets                       --- 静态资源
+    │   ├── image
+    │   └── svg
+    ├── common                     --- 公共代码层
+    │   ├── colors.styl              --- 全局样式
+    │   ├── common.styl
+    │   ├── flexbox.styl	            
+    │   ├── constant.js	             --- 常量定义
+    │   ├── create-io.js	           --- 请求实例创建和mock处理
+    │   ├── global-mock.json         --- 全局请求缓存
+    │   └── global-store.js          --- 全局store处理
+    ├── components                   --- 公共组件层
+    │   └── icon
+    ├── icons                        --- svg-sprite-loader的icon
+    ├── index.html                   --- html-webpack-plugin 模板
+    ├── index.jsx                    ---入口文件
+    ├── pages
+    │   ├── home                     --- 页面
+    │   └── login                    --- 登录页
+    │       ├── index.jsx
+    │       ├── login-mock.json      --- 登陆页的接口mock数据
+    │       ├── login-store.js       --- 登录页的store
+    │       ├── login.jsx
+    │       └── login.styl
+    └── utils                      --- 工具方法一个文件一个方法			
+        ├── index.jsx                --- 入口 @utils引入
+        ├── config.js                --- 全局前端配置 引用config/conf.json
+        ├── create-request.js        --- axios的封装 			 
+        ├── history.js               --- react-router 的history
+        ├── log.js                   --- log处理 可以替换console.log
+        └── tips.jsx                 --- 提示message工具已经antd.message
 ```
-## 常用命令
+### 常用命令
 
 -  **开发**
 
@@ -93,11 +93,11 @@ $ npm start
 ```ssh
 $ npm run build
 $ ls dist 
-public       react-starter                  react-starter_0.1.0_public.tgz
+public       react-starter                  react-starter_1.0.0_public.tgz
 ```
 
 打包会输出到 `dist/[package.name]/[package.version]` 下 
-拷贝`public`和 ` react-starter`文件夹到Render-Server下部署 到到目录`/data/render-server/static`下
+拷贝`public`和 ` react-starter`文件夹到后端服务的静态资源目录下或通过压缩包解压部署。
 
 
 - **cdn部署打包**
@@ -112,300 +112,595 @@ npm run build-cdn
 - **eslint验证**
 
 ```ssh
+# 测试
+$npm run test
 # 修复fix
 $npm run fix
 ```
 
-- **生产mock文件数据**
+- **生成mock文件数据**
+
+更加api-cache缓存的后端接口信息和对应的xx-mock.json文件添加mock数据到xx-mock.json
 
 ```
- 所有： npm run build-mock mockAll 
-  单个mock文件： npm run build-mock global
- 单个mock接口：npm run build-mock global.login
+# "build-mock": "node ./scripts/build-mock.js"
+# 所有：
+npm run build-mock mockAll 
+# 单个mock文件：
+npm run build-mock login
+# 单个mock接口：
+npm run build-mock login.logout
+# 混合
+npm run build-mock login.logout user
 ```
 
+### 项目配置
 
-## 开发配置说明
+拉取代码后替换所有react-starter为你自己的的项目名称。 
 
-新建config/config.js内容使用config_default.js 修改会覆盖config_default.js的配置 具体配置
+#### 配置解耦
+
+复制`config/config_default.js`为`config/config.js`( 本地配置)会优先使用config.js的配置， 配置文件是包含了webpage相关配置和前端的相关配置(动态生成`utils/config.js`引用)，及接口mock的开关配置。 `npm start` 后会有动态生成conf.json和mock.json
+
+```
+├── config
+│   ├── conf.json                                    # git 不跟踪
+│   ├── config.js                                    # git 不跟踪  本地个人开发
+│   ├── config_default.js
+│   ├── index.js
+│   └── webpack.config.js
+├── mock.json                                        # git utils/mock-data.js
+```
+
+#### 配置说明
 
 ```js
+const pkg = require("../package.json");
+
 module.exports = {
   // 名称
   projectName: pkg.name,
+  version: pkg.version,
   // npm run build-cdn 打包的 publicPath 路径
   cdnPrefix: `//cdn.xxx.com/${pkg.name}/${pkg.version}/`,
   // npm run build 打包的 publicPath 路径
   versionPrefix: `/${pkg.name}/${pkg.version}/`,
-  // devServer.port 开发端口
-  port: 8880,
-  // 接口匹配转发 devServer.proxy 这里后端服务target 一般配置render-server服务地址即可
+  // 接口匹配转发 devServer.proxy
+  port: 9999,
+  // 接口转发
   proxy: {
-    "/react-starter/api/*": {
-      target: `http://192.168.1.8:8888`,
+    "/api/*": {
+      target: `http://192.168.90.160:8888`,
       changeOrigin: true, // 支持跨域请求
-      secure: true // 支持 https
-    }
-  },
-  // 这个配置根据dev还是build动态生成config/conf.json中的数据，会被window.conf替换对应配置, 配置在utils.config输出
-  conf: {
-    dev: {
-      // 路径统一前缀
-      pathPrefix: "/react-starter",
-      // 统一接口路径前缀 `${pathPrefix}${apiPrefix}`
-      apiPrefix: "/api",
-      // 是否打印utils.log的日志
-      debug: true,
-      // mock数据模拟请求延迟
-      delay: 500,
-      // 配置接口会使用mock的配置 auth = createIo(authApis, 'auth')第二个参数
-      mock: {
-        "auth.login": "success", // 对应io.auth的login方法
-        "auth.loginInfo": "success",
-        "auth.logout": "success",
-        "data.list": "success"
-      }
+      secure: true,
     },
-    build: { // 打包部署最好不好mock数据 
-      pathPrefix: "/react-starter",
+  },
+  // webpack 打包忽略配置 要在index.html引入public资源
+  externals: {
+    react: 'React',
+    'react-dom': 'ReactDOM',
+  },
+  // 多入口情况的重定向
+  rewrites: [
+    // {
+    //   from: /^\/admin/, to: '/admin.html'
+    // },
+  ],
+  // 前端代码配置 动态生成config/conf.json中的数据， 也是html-webpack-plugin模板的数据
+  conf: {
+    // 开发模式配置
+    dev: {
+      title: "React Starter",
+      pathPrefix: "",
+      // 统一接口前缀 没有写""
       apiPrefix: "/api",
-      debug: false, // utils.log 方法console日志不打印
+      // 影响mock的处理和log的日志打印
+      debug: true,
+      // mock开关配置 
+      mock: {
+        // 对应global-mock.json的内容login.success 的内容
+        "global.login": "success", // failed success
+        "global.loginInfo": "failed", // success failed
+        "global.logout": "success",
+        "login.login": "success",
+      },
+      // 模板index.html 指定public资源的域名比如生产是cdn的资源 
+      publicHost: ''
+    },
+    // 打包模式配置
+    build: {
+      title: "React Starter",
+      pathPrefix: "",
+      apiPrefix: "/api",
+      debug: false,
+      // 前端mock的延迟模拟100毫秒
+      delay: 100,
+      // 生产走前端mock不走接口
+      mock: {},
+      publicHost:''
     }
   }
 };
-
 ```
-
-## 常用功能
 
 ### 接口请求
 
-#### 全局接口配置
+#### 接口封装
 
-接口在src/io 目录下统一配置: 示例`src/io/auth.js`,  并在 `src/io/index.js` 对应配置上
+接口在`common/create-io.js` 中去封装`utils/create-request.js` 
+
+- create-request.js 对axios的进一步封装，返回了axios的实例instance。 不会 throw error
+- create-io.js  创建axios的实例，并对接口定义和mock进行处理和封装
 
 ```js
-// src/io/auth.js
-// 用户登录相关接口配置
-export default {
-  loginInfo: {
-    method: 'GET',
-    url: '/login_info/:userId',
-  },
+// utils/create-request.js
+import axios from 'axios'
+/**
+ * option 字段参数定义
+ * @typedef   {Object} Option  字段参数
+ * @property  {String} baseURL 字段名
+ * @property  {Number} timeout 超时 默认1分钟  60 * 1000
+ * @property  {Object} headers 请求头 默认包含有{'X-Requested-With': 'XMLHttpRequest'}
+ * @property  {Boolean} withCredentials 设置cross跨域 并设置访问权限 允许跨域携带cookie信息 默认false
+ * @property  {Function|null} validateStatus 判断状态码是否promise.reject
+ * @property  {Object} auth  Authorization Header设置  {username: 'janedoe',password: 's00pers3cret'}
+ * @property  {String} responseType 默认json
+ * @property  {Object} cancelToken 取消的token
+ * @property  {Function|null} requestInterceptor 请求拦截器  (options) => options
+ * @property  {Function|null} requestInterceptorWhen 请求拦截器条件 (options) => options.method === 'get'
+ * @property  {Function|null} responseInterceptor 返回拦截器 (response) => { return response}
+ * @property  {Function|null} tip 提示消息 (message) => {}
+ * @property  {Object} showErrorTip 是否要提示消息
+ * /
+ 
+/**
+ * 创建一个请求实例
+ * @param {Option} option
+ * @returns
+ */
+export default function createRequest(option = {}) {
+  //...
+  const instance = axios.create({..})
+  /**
+   * 参数axios基本一致，除了这两还有其他axios的参数都支持
+   * @typedef   {Object} Options  字段参数
+   * @property  {String} url 请求地址
+   * @property  {String} method 字段名
+   * @property  {Object} headers 请求头
+   * @property  {Object} params query参数和router参数的处理 {code: 'query上', ':userId': ‘router参数’}
+   * @property  {Object} data body数据
+   * @property  {Function} endAction 混合处理get header是params ,其他是data
+   * @property  {Object} mock mock数据
+   * @property  {Boolen} showErrorTip 是否判断提示
+   */
+  return async (options) => {...}
+ 
 }
-
-// src/io/index.js
-
-import authApis from './auth'
-
-
-export const auth = createIo(authApis, 'auth') // 第二个参数对应mock的文件名auth.ts
-
-// 使用 src/store/global-store.js
-
-import {auth} from '../io';
-
-
-async login() => {
-  this.setState({
-    loading: true,
-  })
-  // 不会抛出异常 所以不需要try catch
-  const {success, content} = await auth.loginInfo({id: 1, ':userId': 2}); // GET 路由 /react-starter/api/login_info/2?id=1
-  this.setState({
-    loading: false,
-  })
-  if (!success) return
-  this.setState({
-    userInfo: content
-  })
-  // 默认处理success=false, 使用message.error(e.message)
-}
-
 ```
 
- #### 页面下配置使用
+```js
+// common/create-io.js
+import {creatRequest, mockData} from '@utils'
+// 创建一个request 实例
+export const request = creatRequest({})
+
+// 标识是否是简单传参数， 值为true标识复杂封装
+export const rejectToData = Symbol('flag')
+/**
+ * 创建请求IO的封装
+ * @param Option {any { url: string method?: string }}
+  }
+ * @param name mock数据的对应文件去除-mock.json后的
+ */
+export const createIo = (ioContent, name = '') => {
+  const content = {}
+  Object.keys(ioContent).forEach((key) => {
+    // {Options} options
+    content[key] = async (options = {}) => {
+      // 这里判断简单请求封装 [rejectToData] :true 表示复杂封装
+      if (!options[rejectToData]) {
+        options = {
+          mix: options,
+        }
+      }
+      delete options[rejectToData]
+      if (config.debug === false && "其他条件") {
+        // 这个mock数据要深拷贝下 _.cloneDeep(value)
+        ioContent[key].mock = JSON.parse(
+          JSON.stringify(mockData[name][key][config.mock[`${name}.${key}`]])
+        )
+      } else if (name && config.debug === true) {
+        const mockHeader = {'mock-key': name, 'mock-method': key}
+        options.headers = options.headers ? {...options.headers, ...mockHeader} : mockHeader
+      }
+      const option = {...ioContent[key], ...options}
+      // url / 开头使用绝对路径不是拼接统一前缀
+      if (option.url[0] !== '/') {
+        option.url = `${config.apiPrefix}/${option.url}`
+      }
+      return request(option)
+    }
+  })
+  return content
+}
+```
+
+#### 使用
+
+##### 全局store
 
 ```js
-// src/pages/user/io.js
-import {createIo} from '../../io'
-
+// common/global-store.js
+import {runInAction, makeAutoObservable} from 'mobx'
+import {createIo, rejectToData} from './create-io'
 const apis = {
-  updateUser: {
-    url: '/user/:userId',
-    method: 'PUT',
-    apiPrefix:'/api/v2'
+  login: {
+    method: 'POST',
+    url: 'login/:userId',
   },
+  // 其他接口定义
 }
-//mock文件名： xxx-mock.json
-export default createIo(apis, 'xxx')
+const io = createIo(apis, 'global') // // global-mock.json
 
-// src/pages/user/user.tsx
-import io from './io'
-
-async updateUser() => {
-  const {success, content, message: msg} = await auth.updateUser({ // PUT 路由 /react-starter/api/v2/user/1?type=update
-    rejectToData: true, // 为true 表示启用复杂配置方式， 可能简单调用刚好是业务参数会有问题 需要注意
-    showError: false, // 是否直接弹出message 默认true，false需要自己处理
-    // 指定 回调操作 下面是默认操作，传了这个参数会覆盖默认操作 ，默认处理未登录错误码
-    action:(resData) => {
-      if (resData.success === false && resData.code === 'ERROR_NEED_LOGIN') {
-        // TODO 这里可能统一跳转到 也可以是弹窗点击跳转
-        Modal.confirm({
-          title: '重新登录',
-          content: '',
-          onOk: () => {
-            // location.reload()
-            history.push(`${config.pathPrefix}/login?redirect=${window.location.pathname}${window.location.search}`)
-          },
-        })
+export class GlobalStore {
+  // 用户信息
+  userInfo
+  constructor() {
+    makeAutoObservable(this)
+  }
+  // 获取当前的登录信息
+  async login(mobile, password) {
+    // mix的调用方式
+    const {success, content, message} = await io.login({
+      mobile,
+      password,
+      ':userId': 2
+    })
+    // 高级调用方式
+    // const {success, content} = await io.login({
+    //   [rejectToData]: true, // 标识使用了复杂方式
+    //   data: {mobile, password},
+    //   params: {':userId': 2},
+    // })
+    if (success) {
+      runInAction(() => {
+        this.userInfo = content
+      })
+      const querys = new URLSearchParams(history.location.search)
+      const redirect = querys.get('redirect')
+      if (redirect) {
+        history.push(redirect)
+      } else {
+        history.push(`${config.pathPrefix}/home`)
       }
     }
-    headers: {}
-    // 指定路由参数
-    params: {
-      ':userId': 1
-    }
-    query: {
-      type: 'update'
-    }
-    // 指定body 可以是json字符串
-    body: {
-      name: 'new name',
-      age: 20
-    }
-  }); 
-  if (!success) { // 自定义错误处理
-    message.error(msg)
-    return
+    return {success, message}
   }
-  this.setState({
-    userInfo: content
-  })
-
 }
+export default GlobalStore
+```
 
+```jsx
+import GlobalStore from '@common/global-store'
+const stores = {globalStore: new GlobalStore()}
+const App = () => {
+  return (
+    <Suspense fallback="加载中">
+      <Router history={history}>
+        <Switch>
+          <Route path={`${config.pathPrefix}/login`} component={Login} />
+          <Route path={`${config.pathPrefix}`} component={Home} />
+          <Redirect from="/" to={`${config.pathPrefix}`} />
+        </Switch>
+      </Router>
+    </Suspense>
+  )
+}
+ReactDOM.render(
+  <ConfigProvider locale={zhCN}>
+    <Provider {...stores}>
+      <App />
+    </Provider>
+  </ConfigProvider>,
+  document.getElementById('root'),
+)
+```
+
+##### 单独页面使用
+
+一般每个页面都需要一个store去除了state包含一些后端的接口 比如我们在登陆页面有` login-store.js`
+
+```
+    ├── pages
+    │   └── login
+    │       ├── index.jsx
+    │       ├── login-mock.json
+    │       ├── login-store.js
+    │       ├── login.jsx
+    │       └── login.styl
 ```
 
 
 
-请求封装改造 查看`src/io/index.js`和 `src/common/request.js` 中的方法， 比如修改默认的处理
-
-### mock数据
-
-`npm run dev/build` 会自动在`/src/io 目录下生成`mock.json`, 是根据src目录下所有以`-mock.json`结尾的文件合成
-
-如存在 `auth-mock.json`
-
+```js
+// login-store.js
+import {createIo, rejectToData} from './create-io'
+import {makeAutoObservable} from 'mobx'
+const apis = {
+  login: {
+    method: 'POST',
+    url: 'login',
+  },
+}
+const io = createIo(apis, 'login')
+class LoginStore {
+  loading = false
+  userInfo
+ 	constructor() {
+    // makeObservable(this, {
+    //   mobile: observable,
+    //   message: observable,
+    //   loading: observable,
+    //   password: observable,
+    //   login: action,
+    //   setMobile: action,
+    //   setPassword: action,
+    // })
+    makeAutoObservable(this)
+  }
+  async login(mobile, password) {
+    if (this.loading) return ''
+    this.loading = true
+    // 高级调用方式
+    const {success, message, content} = await io.login({
+    	[rejectToData]: true, // 标识使用了复杂方式
+    	data: {mobile, password},
+      showErrorTip: false, // 自己处理message 不统一处理
+      // endAction: () => {} // 自己替换处理endAction
+      // 其拦截器等
+    })
+    this.loading = false
+    if (!success) {
+      this.message = message
+      this.userInfo = content
+      // 其他跳转除了
+      return ''
+    }
+    // 失败提示
+    this.message = message
+  }
+}
 ```
-// src/pages/login/auth-mock.json
+
+```jsx
+import {observer, inject} from 'mobx-react'
+import loginStore from './login-store'
+const Login = function Login({globalStore}) {
+  const [mobile, setMobile] = useState('')
+  const [password, setPassword] = useState('')
+  const handleSubmit = async (evt) => {
+    evt.preventDefault()
+    await loginStore.login(mobile, password)
+  }
+  return (
+    <div className="loginMain" style={{backgroundImage: `url(${bg})`}}>
+			<form className="mt30" onSubmit={handleSubmit}></form>
+		</div>
+  )
+}
+export default inject('globalStore')(observer(Login))
+```
+
+### Mock实现
+
+`npm run dev/build` 会自动在`/` 目录下生成`mock.json`, 是根据src目录下所有以`-mock.json`结尾的文件合成
+
+如存在 `login-mock.json`
+
+```json
+// src/pages/login/login-mock.json
 {
-  "logout": {
-    "success": {
-      "success": true,
-      "message": "",
-      "code": 0,
-      "content": {}
-    },
-    "failed": {
+  "login": {
+		"failed": {
 			"success": false,
-			"message": "登出失败了",
+			"code": "ERROR_PASS_ERROR",
+			"content": null,
+			"message": "账号或密码错误!"
+		},
+		"success": {
+			"success": true,
 			"code": 0,
-			"content": {}
+			"content": {
+				"name": "admin",
+				"nickname": "超级管理员",
+				"permission": 15
+			},
+			"message": ""
 		}
-  }
+	}
 }
 ```
 
-则生成的`/src/io/mock.json`内容为
+则生成的`mock.json`内容为
 
-```
+```json
 {
-	"auth": {
-		"logout": {
+	"login": {
+		"login": {
 			"success": {
 				"success": true,
-				"message": "",
 				"code": 0,
-				"content": {}
-			},
-			"failed": {
-				"success": false,
-				"message": "登出失败了",
-				"code": 0,
-				"content": {}
+				"content": {
+					"name": "admin",
+					"nickname": "超级管理员",
+					"permission": 15
+				},
+				"message": ""
 			}
 		}
 	}
 }
 ```
 
-```
-// src/pages/login/io.js
-import {createIo} from '../../io'
-
-const apis = {
-  logout: {
-    method: 'POST',
-    url: '/auth/logout',
-  },
-}
-//mock文件名： auth-mock.json
-export default createIo(apis, 'auth')
+```js
+// login-store.js
+// 这里的第二个参数就是去对应 login-mock.json文件的内容
+const io = createIo(apis, 'login')
 ```
 
-
-
-文件名称`auth-mock.json` 去除后缀`-mock.json` 和` io = createIo(apis, 'auth') ` 第二个参数auth对应, 创建的io调用的logout方法和要在配置文件mock项配置`auth.logout`开启对应。
-
-这里有两种mock情况 `success` 和 `failed` 具体使用哪种和配置文件的配置对应 如
+这里`login-mock.json`对应的login有两种情况 `success` 和 `failed` 在配置文件配置使用个数据
 
 ```js
-// config.js
+// config.js或 config_default.js
 module.exports = {
   // 开发配置
   conf: {
     dev: {
-      title: "管理后台模板",
-      pathPrefix: "/admin",
-      apiPrefix: "/api",
+			...
       debug: true,
       // 只有配置了mock的才会使用
       mock: {
-        "auth.logout": "success" // 这里对应auth-mock.json的logout.success项, 也可以改为failed模拟请求失败
+        "login.login": "success" // 也可以改为failed模拟请求失败, 会热更新替换mock.json内容
       }
     },
-    // 打包配置
-    build: {
-      title: "管理后台模板",
-      pathPrefix: "/admin",
-      apiPrefix: "/api",
-      debug: true,
-      // 生产打包可以不配置任何mock
-      mock: {}
-    }
   }
 };
 ```
 
-修改config.js 一般需要重新启动服务才能生效， 也可以修改`config/conf.json`的配置，无需重启
+> 这是我们最终要实现的效果，这里有一个约定：**项目目录下所有以`-mock.jsom`文件结尾的文件为mock文件，且文件名不能重复**。
+
+如何实现可以查看`script/api-proxy-cache.js`
+
+### 其他
+
+#### 常用实现
+
+##### 使用useContent来实现全局Store
+
+TODO
+
+##### 使用拦截器和本地缓存实现token请求头会话
+
+TODO
+
+#### 项目部署
 
 ```
+$ npm run build
+$ ls dist 
+public                                 react-starter                  react-starter_0.1.0_public.tgz
+$ ls dist/react-starter                                                        
+1.0.0      index.html
+```
+
+这里build会自动拷贝出打包出来的html文件到`dist/react-starter` 作为模板文件， 在配置模板路径`viewPath: "react-starter/index.html"`
+
+##### 通过Render-Server部署
+
+[Render-Server介绍](https://segmentfault.com/a/1190000038972576) 主要功能包含：
+
+- 一键部署 npm run deploy
+- 支持集群部署配置
+- 是一个文件服务
+- 是一个静态资源服务
+- 在线可视化部署前端项目
+- 配置热更新
+- 在线Postman及接口文档
+- 支持前端路由渲染， 支持模板
+- 接口代理及路径替换
+- Web安全支持 Ajax请求验证，Referer 校验
+- 支持插件开发和在线配置 可实现： 前端模板参数注入、请求头注入、IP白名单、接口mock、会话、第三方登陆等等
+
+上传资源到render-server服务器的静态目录
+
+```
+$scp -r dist/react-starter deploy@192.168.90.68:/data/render-server/static
+
+# 这个后续没有修改只需上传一次
+$scp -r dist/public deploy@192.168.90.68:/data/render-server/static
+```
+
+或者上传压缩包react-starter_1.0.0_public.tgz 到服务器/data/render-server/static 下解压
+
+Render-Server 的页面渲染配置：
+
+```jsx
 {
-	"title": "管理后台模板",
-	"pathPrefix": "/admin",
-	"apiPrefix": "/api",
-	"debug": true,
-	"delay": 500,
-	"mock": {
-		"auth.login": "failed"
-	}
+    "key": "react-starter",
+    "name": "前端脚手架模板",
+    "description": "项目的接口",
+    "viewRender": [
+        {
+            "paths": [
+                "/react-starter/(.*)",
+                "/react-starter"
+            ],
+            "hosts": [],
+            "plugins": [],
+            "defaultData": {},
+            "viewType": "path",
+            "viewPath": "react-starter/index.html",
+            "viewData": ""
+        }
+    ],
+    "apiProxy": [
+        {
+            "methods": [],
+            "paths": [
+                "/react-starter/api/(.*)"
+            ],
+            "referers": [],
+            "pathPrefix": "/react-starter/api",
+            "prefixPath": "",
+            "plugins": [],
+            "backHost": "http://192.168.90.68:9999"
+        }
+    ]
 }
 ```
 
-> 注意： 修改或配置mock数据文件-mock.json 不会实时同步到src/io/mock.json中 需要重启服务才能生效
+##### Nginx部署
 
-### commit 规范
+假设Nginx web目录在`/data/nginx/web/`上传打包的静态文件到该目录下
+
+```
+$scp -r dist/react-starter deploy@192.168.90.68:/data/nginx/web/
+
+# 这个后续没有修改只需上传一次
+$scp -r dist/public deploy@192.168.90.68:/data/nginx/web/
+```
+
+nginx配置
+
+```
+server {
+        listen       80;
+        server_name  test.com;
+        access_log  /opt/third/nginx/logs/vhosts/test.access.log main;
+
+        location ^~ /api/ {
+          proxy_redirect off;
+          proxy_set_header Host $host;
+          proxy_set_header X-Real-IP $remote_addr;
+          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+          client_max_body_size 100M;
+          proxy_buffering on;
+          proxy_buffer_size          128k;
+          proxy_buffers              4 256k;
+          proxy_busy_buffers_size    256k;
+          proxy_pass http://127.0.0.1:8881/api;
+        }
+        
+        location / {
+        	root /data/nginx/web/
+        	index index.html
+        	try_files $uri $uri /react-starter/index.html =500;
+        	
+        }
+}
+```
+
+#### Commit 规范
 
 ```js
 <type>: <description>
@@ -444,8 +739,7 @@ git commit -m "perf: 优化了预测用户接口响应太慢"
 git commit -m "style: 修改xx处缺少分号问题"
 ```
 
-
-### 常用组件介绍
+#### 通用组件开发
 
 目录`src/components` 下
 通用组件推荐使用react hooks编写，组件尽量写成纯函数
@@ -464,11 +758,15 @@ export default function  Button()  {
 }
 ```
 
+#### 常用网站
 
+- [CDN资源](https://www.bootcdn.cn)
 
-## 常用CDN
+  到CDN 下载第三方product的min文件到 src/pubic/xxx/version/xx.js 然后resov
 
-到CDN 下载第三方product的min文件到 src/pubic/xxx/version/xx.js
-https://www.bootcdn.cn
+- [Antd  组件](https://ant.design/components/overview-cn/)
 
+- [React官网文档](https://zh-hans.reactjs.org/docs/getting-started.html)
+
+- [prettier-eslint](https://github.com/prettier/prettier-eslint)
 

@@ -1,0 +1,15 @@
+{
+  "eslint.enable": true,
+  "eslint.options": {
+      "extensions": [
+          ".js",
+          ".jsx",
+          ".ts",
+          ".tsx",
+          ".json"
+      ]
+  },
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  }
+}

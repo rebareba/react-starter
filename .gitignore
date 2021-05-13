@@ -3,7 +3,6 @@
 .DS_store
 *.log
 Untitled
-.vscode
 dist
 .nyc_output
 test.js
