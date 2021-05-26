@@ -131,7 +131,7 @@ export default function createRequest(option = {}) {
     }
     // 自动处理错误消息
     if (showErrorTip && retData.success === false && retData.message && option.tip) {
-      option.tip(retData.message)
+      option.tip.warning(retData.message)
     }
     // 返回前处理
     if (endAction) {

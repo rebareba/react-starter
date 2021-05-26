@@ -1,5 +1,5 @@
 import {Modal} from 'antd'
-import {config, history, creatRequest, mockData, tips, log} from '@utils'
+import {config, history, creatRequest, mockData, message, log} from '@utils'
 import {ERROR_CODE} from './constant'
 
 // 这个表示登陆的弹框只弹出一次
@@ -26,7 +26,7 @@ export const request = creatRequest({
     }
   },
   // 提示错误的方法
-  tip: tips,
+  tip: message,
   // 是否错误显示message
   showErrorTip: true,
   // mock 数据请求的等待时间

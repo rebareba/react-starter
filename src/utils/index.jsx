@@ -6,7 +6,7 @@ export {default as log} from './log'
 
 export {default as creatRequest} from './create-request'
 
-export {default as tips} from './tips'
+export {default as message} from './message'
 
 export {default as history} from './history'
 

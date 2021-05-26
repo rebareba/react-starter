@@ -77,7 +77,7 @@ Github: https://github.com/rebareba/react-starter
         ├── create-request.js        --- axios的封装 			 
         ├── history.js               --- react-router 的history
         ├── log.js                   --- log处理 可以替换console.log
-        └── tips.jsx                 --- 提示message工具已经antd.message
+        └── message.jsx                 --- 提示message工具已经antd.message
 ```
 ### 常用命令
 
@@ -408,7 +408,7 @@ ReactDOM.render(
 
 ##### 单独页面使用
 
-一般每个页面都需要一个store去除了state包含一些后端的接口 比如我们在登陆页面有` login-store.js`
+一般每个页面都需要一个store去管理state，调用一些后端的接口 比如我们在登陆页面有` login-store.js`
 
 ```
     ├── pages
@@ -435,6 +435,7 @@ const apis = {
 const io = createIo(apis, 'login')
 class LoginStore {
   loading = false
+  message = ''
   userInfo
  	constructor() {
     // makeObservable(this, {
@@ -460,10 +461,10 @@ class LoginStore {
       // 其拦截器等
     })
     this.loading = false
-    if (!success) {
+    if (success) {
       this.message = message
       this.userInfo = content
-      // 其他跳转除了
+      // 其他跳转处理
       return ''
     }
     // 失败提示
@@ -493,7 +494,7 @@ export default inject('globalStore')(observer(Login))
 
 ### Mock实现
 
-`npm run dev/build` 会自动在`/` 目录下生成`mock.json`, 是根据src目录下所有以`-mock.json`结尾的文件合成
+`npm run start/build` 会自动在`/` 目录下生成`mock.json`, 是根据src目录下所有以`-mock.json`结尾的文件合成
 
 如存在 `login-mock.json`
 
@@ -541,6 +542,9 @@ export default inject('globalStore')(observer(Login))
 	}
 }
 ```
+
+ 需要在createIo的时候定义对应的第二个参数关联mock数据文件, 不一定需要在同一个目录下的xxx-mock.json文件
+
 
 ```js
 // login-store.js

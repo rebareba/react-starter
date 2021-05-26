@@ -1,5 +1,7 @@
 import {runInAction, makeAutoObservable} from 'mobx'
 // import {createIo, rejectToData} from './create-io'
+import isString from 'lodash/isString'
+import isPlainObject from 'lodash/isPlainObject'
 import {history, config} from '@utils'
 import {createIo} from './create-io'
 // 用户登录相关接口配置
@@ -22,6 +24,8 @@ const io = createIo(apis, 'global')
 export class GlobalStore {
   // 用户信息
   userInfo
+
+  loading = false
 
   constructor() {
     makeAutoObservable(this)
@@ -62,6 +66,24 @@ export class GlobalStore {
       }
     }
     return {success, message}
+  }
+
+  setValue(key, value) {
+    switch (key) {
+      case 'loading':
+        this.modalVisible = value
+        break
+      default:
+    }
+  }
+
+  // 这样写不会生效不会自动监听
+  set(key, value) {
+    if (isString(key)) {
+      this.setValue(key, value)
+    } else if (isPlainObject(key)) {
+      Object.entries(key).forEach(([k, v]) => this.setValue(k, v))
+    }
   }
 }
 export default GlobalStore

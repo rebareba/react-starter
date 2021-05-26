@@ -6,8 +6,8 @@ import {config} from '@utils'
 import Icon from '@components/icon'
 
 // import '../../assets/sprite-icon'
-// import logo from '../../assets/svg/logo.svg'
 import reactLog from '@assets/image/react.png'
+import logo from '@assets/svg/logo.svg'
 
 import './home.styl'
 
@@ -20,9 +20,9 @@ const Home = ({globalStore}) => {
   // console.log('userInfo', userInfo, globalStore)
   return (
     <div className="fbh h100">
-      {/* <div className="frame-logo p10">
+      <div className="frame-logo p10">
         <img src={logo} className="w100 h100" />
-      </div> */}
+      </div>
       <div className="fb1" />
       <div className="fbv">
         {/* <svg><use xlinkHref="#user" /></svg> */}
