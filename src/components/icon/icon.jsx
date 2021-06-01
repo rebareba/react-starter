@@ -1,6 +1,6 @@
 import {observer} from 'mobx-react-lite'
 
-const Icon = ({name, size, fill = '', className, opacity = 1}) => (
+const Icon = ({name, size = 20, fill = '', className, opacity = 1}) => (
   <svg width={size} style={{opacity}} height={size} fill={fill} className={className}>
     <use xlinkHref={`#${name}`} />
   </svg>

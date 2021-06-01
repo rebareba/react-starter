@@ -96,6 +96,7 @@ export default function createRequest(option = {}) {
       option.log(options)
     }
     if (
+      options.headers &&
       (options.headers['Content-Type'] || '').startsWith('application/json') &&
       options.data &&
       typeof options.data !== 'string'
