@@ -96,5 +96,11 @@ module.exports = {
     'react/no-array-index-key': 0, // 不能使用index作为key
     'import/no-cycle': 0,
     'react/react-in-jsx-scope': 0,
+    'no-shadow': 0,
+    'consistent-return': 0,
+    'no-empty': 0,
+    'jsx-a11y/control-has-associated-label': 0,
+    'array-callback-return': 0,
+    // 'no-case-declarations': 0, // switch 的case需要{} 还是需要的
   },
 }
