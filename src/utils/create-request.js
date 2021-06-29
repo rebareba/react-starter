@@ -69,23 +69,23 @@ export default function createRequest(option = {}) {
     if (options.mix) {
       if (typeof options.mix === 'object') {
         Object.keys(options.mix).forEach((key) => {
-          if (key[0] === ':' && options.data) {
-            options.url = options.url.replace(key, encodeURIComponent(options.data[key]))
-            delete options.data[key]
+          if (key[0] === ':' && typeof options.mix[key] !== 'object') {
+            options.url = options.url.replace(key, encodeURIComponent(options.mix[key]))
+            delete options.mix[key]
           }
         })
       }
       const method = (options.method || 'get').toLowerCase()
       if (method === 'get' || method === 'head') {
-        options.params = Object.assign(options.mix, options.params)
+        options.params = {...options.params, ...options.mix}
       } else {
-        options.data = Object.assign(options.mix, options.data)
+        options.data = {...options.data, ...options.mix}
       }
     }
     // 路由参数处理
     if (typeof options.params === 'object') {
       Object.keys(options.params).forEach((key) => {
-        if (key[0] === ':' && options.params) {
+        if (key[0] === ':') {
           options.url = options.url.replace(key, encodeURIComponent(options.params[key]))
           delete options.params[key]
         }
