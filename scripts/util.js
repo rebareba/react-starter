@@ -44,14 +44,14 @@ exports.getBody =  async (stream) => {
 
 exports.jsonParse = (data) => {
   if (!data) return data
-  let obj = ''
+  let obj = {}
   try {
     obj = JSON.parse(data)
   } catch (e) {
     obj = data
     console.error('jsonParse', e)
   }
-  return obj
+  return obj || {}
 }
 
 exports.getIPAdress = () => {

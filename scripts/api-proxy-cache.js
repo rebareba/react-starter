@@ -1,7 +1,7 @@
 /*
  * @Author: changfeng
  * @LastEditors: changfeng
- * @LastEditTime: 2021-05-12 14:26:14
+ * @LastEditTime: 2021-07-27 21:06:30
  * @Description: webpack proxy 模块的接口代理的 前处理 onProxyReq 后处理 onProxyRes 来处理接口缓存操作
  */
 const fs = require('fs')
@@ -19,10 +19,11 @@ try {
 // https://github.com/chimurai/http-proxy-middleware
 module.exports = {
   onProxyReq: async (_, req, res) => {
-    req.reqBody = await getBody(req)
-    const {'mock-method': mockMethod, 'mock-key': mockKey} = req.headers
+    const {'mock-method': mockMethod, 'mock-key': mockKey,'content-type': contentType} = req.headers
     // eslint-disable-next-line no-console
     console.log(`Ajax 请求: ${mockKey}.${mockMethod}`,req.method, req.url)
+    if (!mockKey || !mockMethod || (contentType || '').startsWith('multipart')) return
+    req.reqBody = await getBody(req)
     // eslint-disable-next-line no-console
     req.reqBody && console.log(JSON.stringify(req.reqBody, null, '\t'))
     if (mockKey && mockMethod) {
