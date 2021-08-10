@@ -1,5 +1,5 @@
 import {Modal} from 'antd'
-import {config, history, creatRequest, mockData, message, log} from '@utils'
+import {config, history, creatRequest, mockData, message} from '@utils'
 import {ERROR_CODE} from './constant'
 
 // 这个表示登陆的弹框只弹出一次
@@ -32,7 +32,7 @@ export const request = creatRequest({
   // mock 数据请求的等待时间
   delay: config.delay,
   // 日志打印
-  log,
+  // log,
   responseInterceptor: (response) => {
     return response
   },
@@ -62,16 +62,9 @@ export const createIo = (ioContent, name = '') => {
         }
       }
       delete options[rejectToData]
-      if (
-        name &&
-        config.mock &&
-        config.mock[`${name}.${key}`] &&
-        mockData[name] &&
-        mockData[name][key] &&
-        config.debug === false
-      ) {
+      if (config.debug === false && name && mockData[name] && mockData[name][key]) {
         // 这个mock数据要深拷贝下 _.cloneDeep(value)
-        ioContent[key].mock = JSON.parse(JSON.stringify(mockData[name][key][config.mock[`${name}.${key}`]]))
+        ioContent[key].mock = JSON.parse(JSON.stringify(mockData[name][key]))
       } else if (name && config.debug === true) {
         const mockHeader = {'mock-key': name, 'mock-method': key}
         options.headers = options.headers ? {...options.headers, ...mockHeader} : mockHeader

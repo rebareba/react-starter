@@ -1,7 +1,7 @@
 /*
  * @Author: changfeng
  * @LastEditors: changfeng
- * @LastEditTime: 2021-04-22 22:21:08
+ * @LastEditTime: 2021-08-10 09:29:52
  * @Description: webpack的脚本，动态生成mock.json和config/conf.json, 并且监听config目录下的config
  */ 
 const path = require('path')
@@ -37,7 +37,7 @@ exports.getMockJson =() => mockJsonData
   mockFiles.forEach((filePath) => {
     const p = path.parse(filePath)
     const mockKey = p.name.substr(0, p.name.length - 5)
-    console.log(mockKey, filePath)
+    console.log(mockKey.blue, path.relative(path.join(__dirname, '../src'), filePath))
     if (mockJson[mockKey]) {
       console.error(`有相同的mock文件名称${p.name} 存在`, filePath)
     }
@@ -47,14 +47,45 @@ exports.getMockJson =() => mockJsonData
   // 如果是打包环境， 最小化mock资源数据
   const mockMap = conf.mock || {}
   const buildMockJson = {}
-  Object.keys(mockMap).forEach((key) => {
-    const [name, method] = key.split('.')
-    if (mockJson[name] && mockJson[name][method] && mockJson[name][method][mockMap[key]]) {
-      if (!buildMockJson[name]) buildMockJson[name] = {}
-      if (!buildMockJson[name][method]) buildMockJson[name][method] = {}
-      buildMockJson[name][method][mockMap[key]] = mockJson[name][method][mockMap[key]]
-    }
-  })
+  // 如果是全部mock的情况
+  if (conf.mockAll) {
+    Object.keys(mockJson).forEach((key) => {
+      buildMockJson[key]= {}
+      Object.keys(mockJson[key]).forEach((key2) => {
+        if (mockJson[key][key2]['success']) {
+          buildMockJson[key][key2] =  mockJson[key][key2]['success']
+        }
+        // 如果配置中有定义 就使用配置中的
+        if (mockMap[`${key}.${key2}`] && mockJson[key][key2][mockMap[`${key}.${key2}`]]) {
+          buildMockJson[key][key2] = mockJson[key][key2][mockMap[`${key}.${key2}`]]
+          // 如果有定义却未找到则不使用mock
+        } else if (mockMap[`${key}.${key2}`]) {
+          delete  buildMockJson[key][key2]
+        }
+      })
+    })
+  } else {
+    Object.keys(mockMap).forEach((key) => {
+      const [name, method] = key.split('.')
+      if (name && method) {
+        if (mockJson[name] && mockJson[name][method] && mockJson[name][method][mockMap[key]]) {
+          if (!buildMockJson[name]) buildMockJson[name] = {}
+          if (!buildMockJson[name][method]) buildMockJson[name][method] = {}
+          buildMockJson[name][method] = mockJson[name][method][mockMap[key]]
+        } else if (mockJson[name] && mockJson[name][method] && buildMockJson[name]) {
+          delete buildMockJson[name][method]
+        }
+      } else if (mockJson[name]) { // 如果只有name没有method 则所有method使用success配置项
+        if (!buildMockJson[name]) buildMockJson[name] = {}
+        Object.keys(mockJson[name]).forEach((key) => {
+          if (mockJson[name][key]['success'] && !buildMockJson[name][key]) {
+            buildMockJson[name][key] = mockJson[name][key]['success']
+          }
+        })
+      }
+    })
+  }
+
   mockJsonData = buildMockJson
   fs.writeFileSync(path.join(__dirname, '../mock.json'), JSON.stringify(buildMockJson, null, '\t'))
  }

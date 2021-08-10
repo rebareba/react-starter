@@ -2,7 +2,7 @@ import {runInAction, makeAutoObservable} from 'mobx'
 // import {createIo, rejectToData} from './create-io'
 import isString from 'lodash/isString'
 import isPlainObject from 'lodash/isPlainObject'
-import {history, config} from '@utils'
+import {history, config, log} from '@utils'
 import {createIo} from './create-io'
 // 用户登录相关接口配置
 const apis = {
@@ -37,6 +37,7 @@ export class GlobalStore {
     const {success, content} = await io.loginInfo()
     if (!success) return
     runInAction(() => {
+      log('loginInfo', content)
       this.userInfo = content
     })
   }

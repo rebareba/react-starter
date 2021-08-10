@@ -1,7 +1,7 @@
 /*
  * @Author: changfeng
  * @LastEditors: changfeng
- * @LastEditTime: 2021-07-27 21:06:30
+ * @LastEditTime: 2021-08-10 09:14:18
  * @Description: webpack proxy 模块的接口代理的 前处理 onProxyReq 后处理 onProxyRes 来处理接口缓存操作
  */
 const fs = require('fs')
@@ -20,23 +20,32 @@ try {
 module.exports = {
   onProxyReq: async (_, req, res) => {
     const {'mock-method': mockMethod, 'mock-key': mockKey,'content-type': contentType} = req.headers
-    // eslint-disable-next-line no-console
-    console.log(`Ajax 请求: ${mockKey}.${mockMethod}`,req.method, req.url)
     if (!mockKey || !mockMethod || (contentType || '').startsWith('multipart')) return
     req.reqBody = await getBody(req)
     // eslint-disable-next-line no-console
+    console.log(`Mock 请求: ${mockKey}.${mockMethod}`,req.method, req.url)
     req.reqBody && console.log(JSON.stringify(req.reqBody, null, '\t'))
     if (mockKey && mockMethod) {
       req.mockKey = mockKey
       req.mockMethod = mockMethod
       const conf = getConf()
       const mockJson = getMockJson()
-      if (conf.mock && conf.mock[`${mockKey}.${mockMethod}`] && mockJson[mockKey] && mockJson[mockKey][mockMethod]) {
+      let mockType // mock值的类型
+      if (conf.mockAll || conf.mock[mockKey]) {
+        mockType= 'success'
+      } else if (conf.mock[`${mockKey}.${mockMethod}`]) {
+        mockType = conf.mock[`${mockKey}.${mockMethod}`]
+      }
+      if (
+        mockType &&
+        mockJson[mockKey] &&
+        mockJson[mockKey][mockMethod]
+      ) {
         // eslint-disable-next-line no-console
-        console.log('use mock data'.blue, `${mockKey}.${mockMethod}:`.green, conf.mock[`${mockKey}.${mockMethod}`])
+        console.log('use mock data'.blue, `${mockKey}.${mockMethod}:`.green, mockType)
         res.mock = true
         res.append('isMock','yes')
-        res.send(mockJson[mockKey][mockMethod][conf.mock[`${mockKey}.${mockMethod}`]])
+        res.send(mockJson[mockKey][mockMethod])
         _.destroy()
       }
      

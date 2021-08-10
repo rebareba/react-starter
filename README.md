@@ -562,14 +562,20 @@ module.exports = {
     dev: {
 			...
       debug: true,
+      mockAll: false,
       // 只有配置了mock的才会使用
       mock: {
+        "global": "true", // 表示global全部使用success, 下面可以特殊配置使用其他
+        "global.loginInfo": "failed", // 特殊指定
         "login.login": "success" // 也可以改为failed模拟请求失败, 会热更新替换mock.json内容
       }
     },
   }
 };
 ```
+
+mockAll 的值 让所有请求使用success的mock值， 如果mock配置里面有指定配置则使用指定值， 如果指定的值不存在json中 则不使用mock处理
+
 
 > 这是我们最终要实现的效果，这里有一个约定：**项目目录下所有以`-mock.jsom`文件结尾的文件为mock文件，且文件名不能重复**。
 

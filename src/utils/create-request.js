@@ -117,7 +117,7 @@ export default function createRequest(option = {}) {
         delete options.mix
         delete options.showErrorTip
         const {data} = await instance(options)
-        retData = data
+        retData = data || ''
       } catch (err) {
         retData.success = false
         retData.message = err.message

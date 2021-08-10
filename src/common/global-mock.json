@@ -38,5 +38,13 @@
 			"content": null,
 			"message": "用户未登录，重新登录"
 		}
+	},
+	"logout": {
+		"success": {
+			"success": true,
+			"code": 0,
+			"content": {},
+			"message": ""
+		}
 	}
 }

@@ -35,11 +35,14 @@ module.exports = {
       pathPrefix: "",
       apiPrefix: "/api",
       debug: true,
+      // 是否所有接口都使用mock 默认使用success配置项
+      mockAll: true,
       mock: {
-        "global.login": "success", // failed success
-        "global.loginInfo": "failed", // success failed
-        "global.logout": "success",
-        "login.login": "success",
+        "global": "success", // 所有global 使用success的值
+        "global.login": "failed", // failed success 特殊指定login方法使用的值
+        // "global.loginInfo": "failed", // success failed
+        // "global.logout": "success",
+        // "login.login": "success",
       },
       // 指定public资源的域名 是否是cdn的资源
       publicHost: ''
